@@ -14,6 +14,8 @@ public class GameManager : MonoBehaviour
     public AudioSource somSource;
     public AudioClip somPonto;
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +56,14 @@ public class GameManager : MonoBehaviour
         if (Input.GetKey(KeyCode.R))
         {
             SceneManager.LoadScene("DentroDoJogo");
+        }
+    }
+
+    public void TelaPause()
+    {
+        if (Input.GetKey(KeyCode.Escape))
+        {
+
         }
     }
 }

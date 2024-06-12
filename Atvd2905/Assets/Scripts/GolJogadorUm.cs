@@ -5,6 +5,7 @@ using UnityEngine;
 public class GolJogadorUm : MonoBehaviour
 {
     private GameManager gM;
+    public GameObject bolinha;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,7 +22,8 @@ public class GolJogadorUm : MonoBehaviour
         if (collision.gameObject.CompareTag("bolinha"))
         {
             gM.AumentarPontuacaoUm();
-            collision.gameObject.transform.position = Vector2.zero;
+            Instantiate(bolinha, Vector2.zero, Quaternion.identity);
+            //collision.gameObject.transform.position = Vector2.zero;
         }
     }
 }
