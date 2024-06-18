@@ -35,7 +35,16 @@ public class bolinha : MonoBehaviour
     {
         if (gameManager.pontuacaoJogador1 > 5)
         {
-            velocidadeBola = 500;
+            velocidadeBola = 850;
+            sptBola.sprite = imgBola;
+        }
+        else
+        {
+            velocidadeBola = 300;
+        }
+        if (gameManager.pontuacaoJogador1 >= 15)
+        {
+            velocidadeBola = 850;
             sptBola.sprite = imgBola;
         }
         else
@@ -52,27 +61,15 @@ public class bolinha : MonoBehaviour
         {
             velocidadeBola = 300;
         }
-
-        if (gameManager.pontuacaoJogador1 > 15)
+        if (gameManager.pontuacaoJogador2 >= 15)
         {
-            velocidadeBola = 500;
+            velocidadeBola = 190;
             sptBola.sprite = imgBola;
         }
         else
         {
             velocidadeBola = 300;
         }
-
-        if (gameManager.pontuacaoJogador2 > 15)
-        {
-            velocidadeBola = 190;
-            sptBola.sprite = imgBolaLenta;
-        }
-        else
-        {
-            velocidadeBola = 300;
-        }
-
     }
     public void MovimentoBolinha()
     {
