@@ -14,7 +14,13 @@ public class GameManager : MonoBehaviour
     public AudioSource somSource;
     public AudioClip somPonto;
 
+    public int valorDeAumentoP1 = 4;
+    public int valorDeAumentoP2 = 4;
+    public float speedToAdd = 850;
+    public float speedToSubtract = 450;
 
+    public GameObject telaPausa;
+    public bool pausa;
 
     // Start is called before the first frame update
     void Start()
@@ -27,7 +33,22 @@ public class GameManager : MonoBehaviour
     {
         Reiniciar();
         Sair();
+        LimitadorVel();
+        TelaPause();
     }
+    private void LimitadorVel()
+    {
+        if (speedToAdd >= 900)
+        {
+            speedToAdd = 900;
+        }
+
+        if (speedToSubtract <= 250)
+        {
+            speedToSubtract = 250;
+        }
+    }
+
     public void AumentarPontuacaoUm()
     {
         somSource.PlayOneShot(somPonto);
@@ -53,7 +74,7 @@ public class GameManager : MonoBehaviour
     }
     public void Reiniciar()
     {
-        if (Input.GetKey(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             SceneManager.LoadScene("DentroDoJogo");
         }
@@ -61,9 +82,17 @@ public class GameManager : MonoBehaviour
 
     public void TelaPause()
     {
-        if (Input.GetKey(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-
+            Time.timeScale = 0;
+            telaPausa.SetActive(true);
         }
+
+    }
+    public void Voltar()
+    {
+
+        Time.timeScale = 1;
+        telaPausa.SetActive(false);
     }
 }

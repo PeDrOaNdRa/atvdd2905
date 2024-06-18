@@ -12,14 +12,16 @@ public class bolinha : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip somBolinha;
 
-    private GameManager gameManager;
+    private GameManager gM;
     private SpriteRenderer sptBola;
     public Sprite imgBola, imgBolaLenta;
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        gameManager = FindObjectOfType(typeof(GameManager)) as GameManager;
+        gM = FindObjectOfType(typeof(GameManager)) as GameManager;
         sptBola = GetComponent<SpriteRenderer>();
 
         VelBolinha();
@@ -29,47 +31,24 @@ public class bolinha : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        LimiteBola();
     }
     public void VelBolinha()
     {
-        if (gameManager.pontuacaoJogador1 > 5)
+        if (gM.pontuacaoJogador1 > gM.valorDeAumentoP1)
         {
-            velocidadeBola = 850;
+            velocidadeBola = gM.speedToAdd;
             sptBola.sprite = imgBola;
-        }
-        else
-        {
-            velocidadeBola = 300;
-        }
-        if (gameManager.pontuacaoJogador1 >= 15)
-        {
-            velocidadeBola = 850;
-            sptBola.sprite = imgBola;
-        }
-        else
-        {
-            velocidadeBola = 300;
+            gM.speedToAdd += 150;
         }
 
-        if (gameManager.pontuacaoJogador2 > 5)
+        if (gM.pontuacaoJogador2 > gM.valorDeAumentoP2 )
         {
-            velocidadeBola = 190;
+            velocidadeBola = gM.speedToSubtract;
             sptBola.sprite = imgBolaLenta;
+            gM.speedToSubtract -= 100;
         }
-        else
-        {
-            velocidadeBola = 300;
-        }
-        if (gameManager.pontuacaoJogador2 >= 15)
-        {
-            velocidadeBola = 190;
-            sptBola.sprite = imgBola;
-        }
-        else
-        {
-            velocidadeBola = 300;
-        }
+     
     }
     public void MovimentoBolinha()
     {
@@ -78,5 +57,12 @@ public class bolinha : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision)
     {
         audioSource.PlayOneShot(somBolinha);
+    }
+    public void LimiteBola()
+    {
+        if(transform.position.x <= -9.29f || transform.position.x >= 9.4)
+        {
+            Destroy(gameObject);
+        }
     }
 }
